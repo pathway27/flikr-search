@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+
+import { FlikrPicture } from './types';
+import Picture from './components/Picture';
+
+const flikrURL = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="bg-gray-100 flex justify-center flex-col">
+        <h1 className="text-5xl text-black">Flikr Finder</h1>
+
+      </div>
     </div>
   );
 }
