@@ -35,8 +35,8 @@ function App() {
           value={searchQuery}
         />
 
-        <div className="container grid grid-cols-3 gap-2 mx-auto">
-          {pictures.map((picture: FlikrPicture, i) => <Picture picture={picture} />)
+        <div className="p-10 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+          {pictures.map((picture: FlikrPicture, i) => <Picture picture={picture} setSearchQuery={setSearchQuery} />)
           }
         </div>
       </div>
