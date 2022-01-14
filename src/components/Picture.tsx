@@ -12,7 +12,8 @@ const Picture = (props: PictureProps) => {
 
   return (
     <div className="rounded overflow-hidden shadow-lg">
-      <img className="w-full max-h-40" src={picture.media.m} alt="" />
+      <img className="mx-auto max-h-40" src={picture.media.m} alt="" />
+
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">
           <a href={picture.link} target="_blank" rel="noreferrer">
@@ -26,9 +27,20 @@ const Picture = (props: PictureProps) => {
           {new Date(picture.date_taken).toLocaleDateString()}
         </p>
       </div>
-      <div className="px-6 pt-4 pb-2">
+      <div className="px-6 pt-2 pb-2">
         {picture.tags.split(' ').slice(0, 5).map((tag) => {
-          return <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer" onClick={() => props.setSearchQuery(tag)}>#{tag}</span>
+          return (
+            <span
+              key={tag}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                props.setSearchQuery(tag);
+              }}
+              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer" 
+            >
+              #{tag}
+            </span>
+          )
         })}
       </div>
     </div>

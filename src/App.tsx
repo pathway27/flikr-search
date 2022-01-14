@@ -36,7 +36,7 @@ function App() {
         />
 
         <div className="p-10 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-          {pictures.map((picture: FlikrPicture, i) => <Picture picture={picture} setSearchQuery={setSearchQuery} />)
+          {pictures.map((picture: FlikrPicture, i) => <Picture key={i} picture={picture} setSearchQuery={setSearchQuery} />)
           }
         </div>
       </div>
