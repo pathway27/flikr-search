@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import fetchJsonp from 'fetch-jsonp';
 import {DebounceInput} from 'react-debounce-input';
 
 import './App.css';
 
 import { FlikrPicture } from './types';
-import Picture from './components/Picture';
+import { fetchFlikrPictures } from './utils/Flikr';
 
-const flikrURL = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json'
+import Picture from './components/Picture';
 
 function App() {
   const [pictures, setPictures] = useState([])
@@ -15,8 +14,7 @@ function App() {
 
   useEffect(() => {
     const getPictures = async () => {
-      let feed = await (await fetchJsonp(`${flikrURL}&tags=${searchQuery}`, {jsonpCallback: 'jsoncallback'})).json()
-      setPictures(feed.items)
+      setPictures(await fetchFlikrPictures(searchQuery))
     }
 
     getPictures()
@@ -26,6 +24,7 @@ function App() {
     <div className="App">
       <div className="bg-gray-100 flex justify-center flex-col">
         <h1 className="text-5xl text-black">Flikr Finder</h1>
+        <h3 className="text-2xl text-gray-500	">Explore through tags, they're clickable!</h3>
 
         <DebounceInput
           className="m-3 p-1 text-center"
@@ -35,8 +34,9 @@ function App() {
           value={searchQuery}
         />
 
-        <div className="p-10 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-          {pictures.map((picture: FlikrPicture, i) => <Picture key={i} picture={picture} setSearchQuery={setSearchQuery} />)
+        <div className="p-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+          {pictures.map((picture: FlikrPicture, i) =>
+            <Picture key={i} picture={picture} setSearchQuery={setSearchQuery} />)
           }
         </div>
       </div>
